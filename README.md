@@ -4,6 +4,7 @@ La información requerida para este laboratio esta almacenada en el archivo
 
 Como resultado obtendra la siguiente estructura de archivos:
 
+
 ```
 train/
     negative/
