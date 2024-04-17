@@ -18,7 +18,7 @@ def extraer_archivo(archivo_zip):
 def leer_archivos(carpeta, n_carpeta):
     
     datos = []
-    df = pd.DataFrame(datos, columns=["phrase", "sentimen"])
+    df = pd.DataFrame(datos, columns=["phrase", "sentiment"])
     for archivo in os.listdir(carpeta):
         if archivo.endswith(".txt"):
             ruta_archivo = os.path.join(carpeta, archivo)
@@ -26,13 +26,13 @@ def leer_archivos(carpeta, n_carpeta):
                 contenido = f.read()
                 datos.append((contenido, n_carpeta))
                 #df = df.append({"phrase":contenido,"sentimen": n_carpeta}, ignore_index=True)
-                df.loc[len(df)] = {"phrase":contenido,"sentimen": n_carpeta}
+                df.loc[len(df)] = {"phrase":contenido,"sentiment": n_carpeta}
     return df
 
 archivos=["negative", "neutral", "positive"]
-df2 = pd.DataFrame([], columns=["phrase", "sentimen"])
+df2 = pd.DataFrame([], columns=["phrase", "sentiment"])
 for carpeta in archivos:
-    carpeta_a_recorrer = os.path.join('train', carpeta)
+    carpeta_a_recorrer = os.path.join('test', carpeta)
 # Leer archivos de la carpeta y obtener datos
     datos = leer_archivos(carpeta_a_recorrer, carpeta)
     df2 = pd.concat([df2, leer_archivos(carpeta_a_recorrer, carpeta)], ignore_index=True)
@@ -41,5 +41,5 @@ for carpeta in archivos:
 
 # Mostrar DataFrame
 #print(df.value_counts("sentimen"))
-print(df2.value_counts("sentimen"))
-df2.to_csv("train_dataset.csv", index=False)
+#print(df2.value_counts("sentimen"))
+df2.to_csv("test_dataset.csv", index=False)
